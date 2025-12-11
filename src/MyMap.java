@@ -14,15 +14,19 @@ public class MyMap {
                 columns[i] = new Rows();
                 columns[i].createRow(sizeX);
             }
+            FileManager.writeToLog("Map created");
             return "Map created";
         }
+        FileManager.writeToLog("Incorrect size: createMap");
         return "Incorrect size: createMap";
     }
 
     public Object getFromMap(int indexX, int indexY) {
         if (indexX >= 0 && indexY >= 0 && indexX <= mapSizeX && indexY <= mapSizeY) {
+            FileManager.writeToLog("returned" + columns[indexY].getFromRow(indexX));
             return columns[indexY].getFromRow(indexX);
         }
+        FileManager.writeToLog("Incorrect index: getFromMap");
         return "Incorrect index: getFromMap";
     }
 
@@ -31,8 +35,10 @@ public class MyMap {
             Rows temp = columns[indexY];
             temp.setToIndex(indexX, object);
             columns[indexY] = temp;
+            FileManager.writeToLog("set in map in index" + columns[indexY].getFromRow(indexX));
             return columns[indexY].getFromRow(indexX);
         }
+        FileManager.writeToLog("Incorrect index: addToIndex");
         return "Incorrect index: addToIndex";
     }
 
@@ -41,6 +47,7 @@ public class MyMap {
         for (int i = 0; i < mapSizeY; i++) {
             map += Arrays.toString(columns[i].getRow()) + "\n";
         }
+        FileManager.writeToLog("Map printed");
         return map;
     }
 

@@ -1,7 +1,9 @@
+import java.io.File;
 import java.util.Arrays;
 
 public class Rows {
-    Object[] row;
+    private Object[] row;
+
 
     public void createRow(int size) {
         row = new Object[size];
@@ -9,15 +11,25 @@ public class Rows {
 
     public Object getFromRow(int index) {
         if (index >= 0 && index <= row.length) {
+            FileManager.writeToLog("returned" + row[index]);
             return row[index];
-        } else return "Incorrect index: getFromRow";
+        } else {
+            String message = "Incorrect index: getFromRow";
+            FileManager.writeToLog(message);
+            return message;
+        }
     }
 
     public Object setToIndex(int index, Object object) {
         if (index >= 0 && index <= row.length) {
             row[index] = object;
+            FileManager.writeToLog("set in row in index" + row[index]);
             return row[index];
-        } else return "Incorrect index: setToIndex";
+        } else {
+            String message = "Incorrect index: setToIndex";
+            FileManager.writeToLog(message);
+            return message;
+        }
     }
 
     public Object[] getRow() {
