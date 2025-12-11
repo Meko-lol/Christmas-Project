@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class MyMap {
     private Rows[] columns;
     private int mapSizeX;
@@ -11,26 +13,52 @@ public class MyMap {
             for (int i = 0; i < sizeY; i++) {
                 columns[i] = new Rows();
                 columns[i].createRow(sizeX);
-                return "Created sucesfully";
             }
+            return "Map created";
         }
-        return "Incorrect size";
+        return "Incorrect size: createMap";
     }
 
     public Object getFromMap(int indexX, int indexY) {
         if (indexX >= 0 && indexY >= 0 && indexX <= mapSizeX && indexY <= mapSizeY) {
             return columns[indexY].getFromRow(indexX);
         }
-        return "Incorrect index";
+        return "Incorrect index: getFromMap";
     }
 
-    public Object setToIndex(int indexX, int indexY, Object object) {
-        if (indexX >= 0 && indexY >= 0 && indexX < mapSizeX && indexY >= mapSizeY) {
+    public Object addToIndex(int indexX, int indexY, Object object) {
+        if (indexX >= 0 && indexY >= 0 && indexX < mapSizeX && indexY <= mapSizeY) {
             Rows temp = columns[indexY];
             temp.setToIndex(indexX, object);
             columns[indexY] = temp;
             return columns[indexY].getFromRow(indexX);
         }
-        return "Incorrect index";
+        return "Incorrect index: addToIndex";
+    }
+
+    public String printMap() {
+        String map = "";
+        for (int i = 0; i < mapSizeY; i++) {
+            map += Arrays.toString(columns[i].getRow()) + "\n";
+        }
+        return map;
+    }
+
+    public Rows[] getColumns() {
+        return columns;
+    }
+
+    public int getMapSizeX() {
+        return mapSizeX;
+    }
+
+    public int getMapSizeY() {
+        return mapSizeY;
+    }
+
+    @Override
+    public String toString() {
+        return "MyMap: " +
+                "columns=" + Arrays.toString(columns);
     }
 }
